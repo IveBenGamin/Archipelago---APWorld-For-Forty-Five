@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(New-Item *)",
+      "Bash(python -c \"from worlds.forty_five import FortyFiveWorld\")",
+      "Bash(python -c \"from worlds import forty_five; print\\('ok'\\)\")",
+      "Bash(python -c ' *)"
+    ]
+  }
+}
