@@ -160,7 +160,16 @@ def load_cards(path: Optional[Union[str, Path]] = None) -> list:
         baseDamage, cost, price, dark, tags, traitEffects.
     """
     src = Path(path) if path else _CARDS_ONJ
-    text = _strip_comments(src.read_text(encoding="utf-8"))
+    try:
+        text = src.read_text(encoding="utf-8")
+    except OSError:
+        # Loaded from a .apworld zip — the path is virtual, so use the zipimporter
+        loader = getattr(__spec__, "loader", None)
+        if loader and hasattr(loader, "get_data"):
+            text = loader.get_data(str(src)).decode("utf-8")
+        else:
+            raise
+    text = _strip_comments(text)
     cards = [_parse_block(b) for b in _extract_card_blocks(text)]
     return sorted(cards, key=lambda entry: (entry["name"] or "").lower())
 
