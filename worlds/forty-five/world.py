@@ -57,4 +57,5 @@ class FortyFiveWorld(World):
     def fill_slot_data(self) -> Mapping[str, Any]:
         return {
             **self.options.as_dict("death_link", "obscured_choices"),
+            "seed": self.multiworld.seed_name,
         }
