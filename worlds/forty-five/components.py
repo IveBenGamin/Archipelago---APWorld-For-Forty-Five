@@ -1,3 +1,4 @@
+# TODO maybe use this once I understand auto-connect better
 import os
 import webbrowser
 

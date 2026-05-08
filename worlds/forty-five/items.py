@@ -115,5 +115,5 @@ def create_a_item(world: FortyFiveWorld, name: str) -> FortyFiveItem:
 
 def get_definite_items(world: FortyFiveWorld) -> list[FortyFiveItem]:
     bullets = [create_a_item(world, card["title"]) for card in _cards for _ in range(card["quantity"])]
-    towns = [create_a_item(world, "Progressive Town Unlock")] * world.options.town_unlocks.value
+    towns = [create_a_item(world, "Progressive Town Unlock") for _ in range(world.options.town_unlocks.value)]
     return bullets + towns
