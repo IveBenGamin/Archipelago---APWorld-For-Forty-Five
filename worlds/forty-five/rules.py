@@ -23,4 +23,8 @@ def set_all_location_rules(world: FortyFiveWorld) -> None:
 
 
 def set_completion_condition(world: FortyFiveWorld) -> None:
-    world.multiworld.completion_condition[world.player] = lambda state: state.has("Victory", world.player)
+    from .options import GoalCondition
+    if world.options.goal_condition == GoalCondition.option_early_goal:
+        world.multiworld.completion_condition[world.player] = lambda state: state.has("Early Victory", world.player)
+    else:
+        world.multiworld.completion_condition[world.player] = lambda state: state.has("Victory", world.player)

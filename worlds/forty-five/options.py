@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from Options import Accessibility, DeathLink, OptionGroup, PerGameCommonOptions, Range, Toggle, Visibility
+from Options import Accessibility, Choice, DeathLink, OptionGroup, PerGameCommonOptions, Range, Toggle, Visibility
 
 
 class FortyFiveAccessibility(Accessibility):
@@ -8,17 +8,6 @@ class FortyFiveAccessibility(Accessibility):
 
 
 # Game Settings
-
-class RatioOfUsefulToFiller(Range):
-    """
-    The percentage of non-bullet filler slots that will be filled with useful items,
-    as defined by probability weight below.
-    The remainder will be filler items, also defined by probability weight below.
-    """
-    display_name = "Ratio of Useful to Filler"
-    range_start = 0
-    range_end = 100
-    default = 70
 
 class TownUnlocks(Range):
     """
@@ -37,6 +26,28 @@ class ObscuredChoices(Toggle):
     """
     display_name = "Obscured Choices"
 
+class GoalCondition(Choice):
+    """
+    The default goal condition is a boss in the final town.
+    However, for shorter games, or for less experienced players,
+    you may want to move the goal earlier. Choosing the second option
+    moves the goal one road earlier
+    """
+    display_name = "Goal Condition"
+    option_full_game = 0
+    option_early_goal = 1
+    default = 0
+
+class RatioOfUsefulToFiller(Range):
+    """
+    The percentage of non-bullet filler slots that will be filled with useful items,
+    as defined by probability weight below.
+    The remainder will be filler items, also defined by probability weight below.
+    """
+    display_name = "Ratio of Useful to Filler"
+    range_start = 0
+    range_end = 100
+    default = 70
 
 # Useful Item Pool
 
@@ -182,6 +193,7 @@ class FortyFiveOptions(PerGameCommonOptions):
     accessibility: FortyFiveAccessibility
     # Game Settings
     death_link: DeathLink
+    goal_condition: GoalCondition
     obscured_choices: ObscuredChoices
     town_unlocks: TownUnlocks
     ratio_of_useful_to_filler: RatioOfUsefulToFiller
@@ -209,6 +221,7 @@ option_groups = [
         TownUnlocks,
         ObscuredChoices,
         DeathLink,
+        GoalCondition,
         RatioOfUsefulToFiller,
     ]),
     OptionGroup("Useful Item Pool", [
@@ -238,6 +251,7 @@ option_presets: dict = {
         "death_link": 0,
         "obscured_choices": 0,
         "town_unlocks": 5,
+        "goal_condition": 0,
         "ratio_of_useful_to_filler": 70,
         # Useful Item Pool
         "twenty_five_cash_weight": 7,
