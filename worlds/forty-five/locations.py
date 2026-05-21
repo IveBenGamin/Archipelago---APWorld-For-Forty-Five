@@ -85,5 +85,5 @@ def create_events(world: FortyFiveWorld) -> None:
 
     tabu_letter_outpost = world.get_region("Tabu Letter Outpost")
     tabu_letter_outpost.add_event(
-        "Tabu-Salem Road Final Battle", "Early Victory", location_type=FortyFiveLocation, item_type=items.FortyFiveItem
+        "Tabu-Salem Road Final Battle", "Earlyand  Victory", location_type=FortyFiveLocation, item_type=items.FortyFiveItem
     )

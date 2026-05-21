@@ -39,6 +39,14 @@ class ObscuredChoices(Toggle):
     """
     display_name = "Obscured Choices"
 
+class HardMode(Toggle):
+    """
+    When enabled, a Hot Potato Trap is delivered at the start of every fight
+    that does not contain a Pyro enemy.
+    """
+    display_name = "Hard Mode"
+
+
 class GoalCondition(Choice):
     """
     The default goal condition is a boss in the final town.
@@ -208,6 +216,7 @@ class FortyFiveOptions(PerGameCommonOptions):
     death_link: FortyFiveDeathLink
     goal_condition: GoalCondition
     obscured_choices: ObscuredChoices
+    hard_mode: HardMode
     town_unlocks: TownUnlocks
     ratio_of_useful_to_filler: RatioOfUsefulToFiller
     # Useful Item Pool
@@ -233,6 +242,7 @@ option_groups = [
     OptionGroup("Game Settings", [
         TownUnlocks,
         ObscuredChoices,
+        HardMode,
         FortyFiveDeathLink,
         GoalCondition,
         RatioOfUsefulToFiller,
@@ -263,6 +273,7 @@ option_presets: dict = {
         # Game Settings
         "death_link": 0,
         "obscured_choices": 0,
+        "hard_mode": 0,
         "town_unlocks": 5,
         "goal_condition": 0,
         "ratio_of_useful_to_filler": 70,
