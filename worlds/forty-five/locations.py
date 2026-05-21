@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, NamedTuple
 from BaseClasses import Location
 from . import items
+from .items import _TUTORIAL_BULLETS
 from .game.parse_cards import get_obtainable_cards
 
 if TYPE_CHECKING:
@@ -18,7 +19,6 @@ class LocData(NamedTuple):
 
 _cards = get_obtainable_cards()
 
-_TUTORIAL_BULLETS = {"Big Bullet", "Worker Bullet", "Incendiary Bullet", "Silver Bullet"}
 
 _POOL_TO_REGION: dict[int, str] = {
     0: "Aqua Balle",

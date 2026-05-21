@@ -16,6 +16,7 @@ class FortyFiveItem(Item):
 
 _cards = get_obtainable_cards()
 
+_TUTORIAL_BULLETS = {"Big Bullet", "Worker Bullet", "Incendiary Bullet", "Silver Bullet"}
 
 item_table: dict[str, ItemData] = {
     "Hot Potato Trap": ItemData(1, ItemClassification.trap),
@@ -114,6 +115,10 @@ def create_a_item(world: FortyFiveWorld, name: str) -> FortyFiveItem:
 
 
 def get_definite_items(world: FortyFiveWorld) -> list[FortyFiveItem]:
-    bullets = [create_a_item(world, card["title"]) for card in _cards for _ in range(card["quantity"])]
+    bullets = [
+        create_a_item(world, card["title"])
+        for card in _cards
+        for _ in range(card["quantity"] - (1 if card["title"] in _TUTORIAL_BULLETS else 0))
+    ]
     towns = [create_a_item(world, "Progressive Town Unlock") for _ in range(world.options.town_unlocks.value)]
     return bullets + towns

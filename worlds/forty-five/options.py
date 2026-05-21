@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from Options import Accessibility, Choice, DeathLink, OptionGroup, PerGameCommonOptions, Range, Toggle, Visibility
+from Options import Accessibility, Choice, OptionGroup, PerGameCommonOptions, Range, Toggle, Visibility
 
 
 class FortyFiveAccessibility(Accessibility):
@@ -8,6 +8,19 @@ class FortyFiveAccessibility(Accessibility):
 
 
 # Game Settings
+
+class FortyFiveDeathLink(Choice):
+    """
+    None: Death link is disabled.
+    Lenient: Death link is enabled. When triggered, your run resets, but you restart from your most recently visited town instead of the beginning.
+    Torture: Standard death link. When triggered, your run resets, and you start over from the beginning.
+    """
+    display_name = "Death Link"
+    option_none = 0
+    option_lenient = 1
+    option_torture = 2
+    default = 0
+
 
 class TownUnlocks(Range):
     """
@@ -192,7 +205,7 @@ class TenCashWeight(Range):
 class FortyFiveOptions(PerGameCommonOptions):
     accessibility: FortyFiveAccessibility
     # Game Settings
-    death_link: DeathLink
+    death_link: FortyFiveDeathLink
     goal_condition: GoalCondition
     obscured_choices: ObscuredChoices
     town_unlocks: TownUnlocks
@@ -220,7 +233,7 @@ option_groups = [
     OptionGroup("Game Settings", [
         TownUnlocks,
         ObscuredChoices,
-        DeathLink,
+        FortyFiveDeathLink,
         GoalCondition,
         RatioOfUsefulToFiller,
     ]),
