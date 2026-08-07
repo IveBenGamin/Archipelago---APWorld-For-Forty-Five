@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from Options import Accessibility, Choice, OptionGroup, PerGameCommonOptions, Range, Toggle, Visibility
+from Options import Accessibility, Choice, DeathLink, OptionGroup, PerGameCommonOptions, Range, Toggle, Visibility
 
 
 class FortyFiveAccessibility(Accessibility):
@@ -11,14 +11,13 @@ class FortyFiveAccessibility(Accessibility):
 
 class FortyFiveDeathLink(Choice):
     """
-    None: Death link is disabled.
-    Lenient: Death link is enabled. When triggered, your run resets, but you restart from your most recently visited town instead of the beginning.
+    Lenient: When death link triggers, your run resets, but you restart from your most recently visited town.
     Torture: Standard death link. When triggered, your run resets, and you start over from the beginning.
+    Only applies when Death Link is enabled.
     """
-    display_name = "Death Link"
-    option_none = 0
-    option_lenient = 1
-    option_torture = 2
+    display_name = "Death Link Type"
+    option_lenient = 0
+    option_torture = 1
     default = 0
 
 
@@ -41,8 +40,8 @@ class ObscuredChoices(Toggle):
 
 class HardMode(Toggle):
     """
-    When enabled, a Hot Potato Trap is delivered at the start of every fight
-    that does not contain a Pyro enemy.
+    Just in case you hate life. Gives you a hot potato for every battle that does not have Pyro.
+    You probably do not want this.
     """
     display_name = "Hard Mode"
 
@@ -213,7 +212,8 @@ class TenCashWeight(Range):
 class FortyFiveOptions(PerGameCommonOptions):
     accessibility: FortyFiveAccessibility
     # Game Settings
-    death_link: FortyFiveDeathLink
+    death_link: DeathLink
+    death_link_type: FortyFiveDeathLink
     goal_condition: GoalCondition
     obscured_choices: ObscuredChoices
     hard_mode: HardMode
@@ -243,6 +243,7 @@ option_groups = [
         TownUnlocks,
         ObscuredChoices,
         HardMode,
+        DeathLink,
         FortyFiveDeathLink,
         GoalCondition,
         RatioOfUsefulToFiller,
@@ -272,6 +273,7 @@ option_presets: dict = {
     "Default": {
         # Game Settings
         "death_link": 0,
+        "death_link_type": 0,
         "obscured_choices": 0,
         "hard_mode": 0,
         "town_unlocks": 5,

@@ -3,13 +3,13 @@ from collections.abc import Mapping
 from typing import Any
 from worlds.AutoWorld import World
 from . import items, locations, regions, rules, web_world
-from . import options as forty_five_options  # rename due to a name conflict with World.options
+from . import options as forty_five_options
 
 
 class FortyFiveWorld(World):
     """
-    Forty-Five is a perfect mix of card game, rogue-lite, and pure wild west mayhem.
-    Explore an ever-changing map, collect interesting cards, and battle enemies.
+    .Forty-Five is a deckbuilding card game set in the wild west.
+    Collect and master powerful cards, battle different enemies and try not to end up six feet deep!
     """
 
     game = "Forty-Five"
@@ -56,6 +56,6 @@ class FortyFiveWorld(World):
 
     def fill_slot_data(self) -> Mapping[str, Any]:
         return {
-            **self.options.as_dict("death_link", "obscured_choices", "hard_mode", "goal_condition"),
+            **self.options.as_dict("death_link", "death_link_type", "obscured_choices", "hard_mode", "goal_condition"),
             "seed": self.multiworld.seed_name,
         }
