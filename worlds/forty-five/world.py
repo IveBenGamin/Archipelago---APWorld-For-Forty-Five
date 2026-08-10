@@ -24,6 +24,8 @@ class FortyFiveWorld(World):
 
     item_name_to_id = {name: data.code for name, data in items.item_table.items() if data.code is not None}
 
+    item_name_groups = items.item_groups
+
     origin_region_name = "Tutorial"
 
 
